@@ -85,6 +85,40 @@ class UserController extends Controller
             return redirect('/login');
         }
     }
+
+    public function NewpassData(Request $req){
+        $req->validate([
+            'oldpassword' => 'required',
+            'newpassword' => ['required', 'confirmed', Password::min(8)
+                            ->mixedCase()
+                            ->letters()
+                            ->numbers()
+                                    ],
+        'newpassword_confirmation'              => 'required',
+        ],[
+            'oldpassword.required'                  => 'Jelszót kötelező megadni!',
+            'newpassword.required'                  => 'Jelszót kötelező megadni!',
+            'newpassword.confirmed'                 => 'A két jelszó nem egyezik!',
+            'newpassword_confirmation.required'     => 'Jelszót kötelező mégegyszer megadni!',
+            'newpassword.min'                       => 'Minimum 8 karakter legyen a jelszó',
+            'newpassword.mixed'                     => 'A jelszó tartalmazzon kis-, és nagybetűt!',
+            'newpassword.letters'                   => 'A jelszó tartalmazzon betűket!',
+            'newpassword.numbers'                   => 'A jelszó tartalmazzon számokat!',]);
+
+        if(Hash::check($req->oldpassword, Auth::user()->password))
+        {
+            $data   = User::find(Auth::user()->id);
+            $data->password = Hash::make($req->newpassword);
+            $data->Save();
+            return view('mypage', ['sv' => 'A jelszava megváltozott!']);
+        } else {
+            return viev('newpass', [
+                'sv' => 'Nem sikerült megváltoztatni a jelszavát!'
+            ]);
+        }
+
+
+    }
 }
 
 
