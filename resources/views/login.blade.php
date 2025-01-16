@@ -11,9 +11,10 @@
                     @if ($errors->any())
                     <p class="text-danger">Adja meg mindkét mező adatát!</p>
                     @endif
-                    @if (isset($sv))
-                    <p class="text-danger">Név vagy a jelszó nem egyezik!</p>
-                    @endif
+                    @isset($sv)
+                        <p class="text-danger">Név vagy a jelszó nem egyezik!</p>
+                    @endisset
+
                 <div class="py-2">
                     <label for="name" class="form-label">Felhasználónév:</label>
                     <input type="text" name="name" id="name" class="form-control" >

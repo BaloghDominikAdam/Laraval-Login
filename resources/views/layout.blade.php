@@ -26,6 +26,7 @@
             </li>
           <div class="ms-auto">
             @auth
+            <span class="text-white">Szia! {{Auth::user()->name}}</span>
             <a class="fs-4 me-2" href="/mypage"><i class="fa-solid fa-user"></i></a>
             <a class="fs-4 me-2" href="/logout"><i class="fa-solid fa-right-to-bracket"></i></a>
             @else

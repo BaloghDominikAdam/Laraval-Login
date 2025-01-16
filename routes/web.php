@@ -15,3 +15,21 @@ Route::post('/login', [UserController::class, 'Login']);
 
 
 
+
+Route::get('/logout', [UserController::class, 'Logout']);
+
+
+
+Route::get('/mypage', [UserController::class, 'Mypage']);
+
+
+Route::get('/newpass', [UserController::class, 'Newpass']);
+Route::post('/newpass', [UserController::class, 'NewpassData']);
+
+
+
+
+
+
+
+

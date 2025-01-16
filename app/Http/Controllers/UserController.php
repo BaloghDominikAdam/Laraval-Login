@@ -55,11 +55,36 @@ class UserController extends Controller
         if(Auth::attempt(['name' => $req->name, 'password' => $req->password])){
             return redirect('/');
         } else {
-            return redirect('/login')->withErrors([
-                'sv' => 'A név vagy a jelszó nem egyezik!'
+
+            return view('/login', [
+                'sv' => 'Nem sikerült'
             ]);
         }
     }
 
 
+    public function Logout(){
+        Auth::logout();
+        return redirect('/');
+    }
+
+
+    public function Mypage(){
+        if(Auth::check()){
+            return view('mypage');
+        } else {
+            return redirect('/login');
+        }
+    }
+
+
+    public function Newpass(){
+        if(Auth::check()){
+            return view('Newpass');
+        } else {
+            return redirect('/login');
+        }
+    }
 }
+
+
