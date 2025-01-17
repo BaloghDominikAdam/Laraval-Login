@@ -28,6 +28,9 @@ Route::post('/newpass', [UserController::class, 'NewpassData']);
 
 
 
+Route::get('/del', [UserController::class, 'Del']);
+Route::get('/exit', [UserController::class, 'Exit']);
+
 
 
 

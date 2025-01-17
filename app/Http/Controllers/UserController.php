@@ -119,6 +119,26 @@ class UserController extends Controller
 
 
     }
+
+
+    public function Del(){
+        if(Auth::check()){
+            return view('del');
+        } else {
+            return redirect('/login');
+        }
+    }
+
+    public function Exit(){
+        if(Auth::check()){
+            $data = user::find(Auth::user()->id);
+            $data->Delete();
+            Auth::logout();
+            return redirect('/');
+        } else {
+
+        }
+    }
 }
 
 
